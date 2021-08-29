@@ -4,8 +4,9 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /code
 
-COPY requirements.txt .
-COPY dev_requirements.txt .
+COPY . .
+#COPY requirements.txt .
+#COPY dev_requirements.txt .
 
 RUN apt-get update && \
     apt-get install -y netcat-openbsd gcc && \
@@ -14,7 +15,5 @@ RUN apt-get update && \
     apt purge -y gcc && \
     apt autoremove -y && \
     rm -rf /var/lib/apt/lists/*
-
-COPY . .
 
 RUN python manage.py collectstatic --no-input
